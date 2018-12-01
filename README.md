@@ -1,28 +1,15 @@
-![](http://res.cloudinary.com/hashnode/image/upload/w_200/v1466495663/static_imgs/mern/v2/mernio-logo.png)
-
-# mern-starter
+# aliasme
 ![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=v2.0.0)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Discuss on Hashnode](
 https://hashnode.github.io/badges/mern.svg)](https://hashnode.com/n/mern)
 
 
-MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimises the setup time and gets you up to speed using proven technologies.
+A url shoterner app build on top of MERN. MERN is a scaffolding tool which makes it easy to build isomorphic apps using Mongo, Express, React and NodeJS. It minimises the setup time and gets you up to speed using proven technologies.
 
 - [Website](http://mern.io)
 - [Documentation](http://mern.io/documentation.html)
 - [Discussions](https://hashnode.com/n/mern)
-
-## Road to V3!
-We're on our way towards V3, which will bring a few updates to MERN! We are tracking with the following milestones:
-
-- V2.4.0 -> Webpack 3 and many fixes *Completed* : [list of changes](Changes.md)
-- V2.5.0 -> React V16.x upgrade and propTypes fix
-- V2.6.0 -> React Router V4
-- V2.7.0 -> Webpack upgrade to V4
-- V2.8.0 -> database/mongo/mongoose updates/fixes
-- V2.9.0 -> Express/Server dependencies/code upgrade
-- V3.0.0 -> CLI/devtools optimization (docker, etc.)
 
 ## Quickstart
 
@@ -189,26 +176,6 @@ To reset the database:
 ```sh
 docker-compose down --volumes
 ```
-
-### Make your MERN
-In this version, we enabled the `mern-cli` to clone not only this project but also the variants of `mern-starter` like one project with MaterialUI or JWT auth. To make your version of MERN, follow these steps
-
-1. Clone this project
-    ```sh
-    git clone https://github.com/Hashnode/mern-starter
-    ```
-
-2. Make your changes. Add a package, add authentication, modify the file structure, replace Redux with MobX or anything else.
-
-3. In this version, we also added code generators. Blueprints for those generators are located at `config/blueprints`, and config is located at `mern.json`. Make sure to edit them if necessary after your made modifications in the previous step. There is a section below which explains how to modify generators.
-
-4. Next clone `mern-cli` project
-    ```sh
-    git clone https://github.com/Hashnode/mern-cli
-    ```
-
-5. Add your project details to `variants.json` in the cloned project and send a pull request.
-
 ### Modifying Generators
 
 #### mern.json

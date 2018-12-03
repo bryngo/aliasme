@@ -7,12 +7,14 @@ import styles from './PostCreateWidget.css';
 
 export class PostCreateWidget extends Component {
   addPost = () => {
-    const nameRef = this.refs.name;
-    const titleRef = this.refs.title;
-    const contentRef = this.refs.content;
-    if (nameRef.value && titleRef.value && contentRef.value) {
-      this.props.addPost(nameRef.value, titleRef.value, contentRef.value);
-      nameRef.value = titleRef.value = contentRef.value = '';
+    const orgRef = this.refs.org;
+    const redirectDomainRef = this.refs.redirectDomain;
+    const customDomainRef = this.refs.customDomain;
+    const customURL = `${window.location.hostname}:8000/${orgRef.value}/${customDomainRef.value}`;
+
+    if (orgRef.value && redirectDomainRef.value && customDomainRef.value) {
+      this.props.addPost(orgRef.value, redirectDomainRef.value, customDomainRef.value, customURL);
+      orgRef.value = redirectDomainRef.value = customDomainRef.value = '';
     }
   };
 
@@ -22,9 +24,9 @@ export class PostCreateWidget extends Component {
       <div className={cls}>
         <div className={styles['form-content']}>
           <h2 className={styles['form-title']}><FormattedMessage id="createNewPost" /></h2>
-          <input placeholder={this.props.intl.messages.authorName} className={styles['form-field']} ref="name" />
-          <input placeholder={this.props.intl.messages.postTitle} className={styles['form-field']} ref="title" />
-          <textarea placeholder={this.props.intl.messages.postContent} className={styles['form-field']} ref="content" />
+          <input placeholder={this.props.intl.messages.org} className={styles['form-field']} ref="org" />
+          <input placeholder={this.props.intl.messages.redirectDomain} className={styles['form-field']} ref="redirectDomain" />
+          <input placeholder={this.props.intl.messages.customDomain} className={styles['form-field']} ref="customDomain" />
           <a className={styles['post-submit-button']} href="#" onClick={this.addPost}><FormattedMessage id="submit" /></a>
         </div>
       </div>

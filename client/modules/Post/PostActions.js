@@ -17,9 +17,10 @@ export function addPostRequest(post) {
   return (dispatch) => {
     return callApi('posts', 'post', {
       post: {
-        name: post.name,
-        title: post.title,
-        content: post.content,
+        org: post.org,
+        redirectDomain: post.redirectDomain,
+        customDomain: post.customDomain,
+        customURL: post.customURL,
       },
     }).then(res => dispatch(addPost(res.post)));
   };

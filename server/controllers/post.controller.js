@@ -25,18 +25,17 @@ export function getPosts(req, res) {
  * @returns void
  */
 export function addPost(req, res) {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
+  if (!req.body.post.org || !req.body.post.redirectDomain || !req.body.post.customDomain || !req.body.post.customURL) {
     res.status(403).end();
   }
 
   const newPost = new Post(req.body.post);
-
   // Let's sanitize inputs
-  newPost.title = sanitizeHtml(newPost.title);
-  newPost.name = sanitizeHtml(newPost.name);
-  newPost.content = sanitizeHtml(newPost.content);
-
-  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
+  newPost.org = sanitizeHtml(newPost.org);
+  newPost.redirectDomain = sanitizeHtml(newPost.redirectDomain);
+  newPost.customDomain = sanitizeHtml(newPost.customDomain);
+  newPost.customURL = sanitizeHtml(newPost.customURL);
+  newPost.slug = slug(newPost.org.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
   newPost.save((err, saved) => {
     if (err) {

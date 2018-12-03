@@ -18,8 +18,7 @@ test('renders properly', t => {
   t.truthy(wrapper.hasClass('form'));
   t.truthy(wrapper.hasClass('appear'));
   t.truthy(wrapper.find('h2').first().containsMatchingElement(<FormattedMessage id="createNewPost" />));
-  t.is(wrapper.find('input').length, 2);
-  t.is(wrapper.find('textarea').length, 1);
+  t.is(wrapper.find('input').length, 3);
 });
 
 test('hide when showAddPost is false', t => {
@@ -46,13 +45,13 @@ test('calls addPost', t => {
     <PostCreateWidget addPost={addPost} showAddPost />
   );
 
-  wrapper.ref('name').value = 'David';
-  wrapper.ref('title').value = 'Some Title';
-  wrapper.ref('content').value = 'Bla Bla Bla';
+  wrapper.ref('org').value = 'DCSC';
+  wrapper.ref('redirectDomain').value = 'https://bryngo.me/';
+  wrapper.ref('customDomain').value = 'bryan';
 
   wrapper.find('a').first().simulate('click');
   t.truthy(addPost.calledOnce);
-  t.truthy(addPost.calledWith('David', 'Some Title', 'Bla Bla Bla'));
+  t.truthy(addPost.calledWith('DCSC', 'https://bryngo.me/', 'bryan'));
 });
 
 test('empty form doesn\'t call addPost', t => {

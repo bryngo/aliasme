@@ -16,6 +16,7 @@ import { getPosts } from '../../PostReducer';
 
 class PostListPage extends Component {
   componentDidMount() {
+    // window.location = 'https://bryngo.me/';
     this.props.dispatch(fetchPosts());
   }
 
@@ -25,9 +26,10 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (name, title, content) => {
+  handleAddPost = (org, redirectDomain, customDomain, customURL) => {
     this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content }));
+
+    this.props.dispatch(addPostRequest({ org, redirectDomain, customDomain, customURL }));
   };
 
   render() {
@@ -38,6 +40,8 @@ class PostListPage extends Component {
       </div>
     );
   }
+
+
 }
 
 // Actions required to provide data for this component to render in sever side.
@@ -53,9 +57,10 @@ function mapStateToProps(state) {
 
 PostListPage.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    org: PropTypes.string.isRequired,
+    redirectDomain: PropTypes.string.isRequired,
+    customDomain: PropTypes.string.isRequired,
+    customURL: PropTypes.string.isRequired,
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,

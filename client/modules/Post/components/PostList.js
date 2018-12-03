@@ -22,9 +22,10 @@ function PostList(props) {
 
 PostList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    org: PropTypes.string.isRequired,
+    redirectDomain: PropTypes.string.isRequired,
+    customDomain: PropTypes.string.isRequired,
+    customURL: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   })).isRequired,

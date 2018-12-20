@@ -62,6 +62,20 @@ export function getPost(req, res) {
 }
 
 /**
+ * Get a single post by org and custom domain
+ * @param req
+ * @param res
+ */
+export function getPostbyOrgDom(req, res) {
+  Post.findOne({ org: req.params.org, customDomain: req.params.customDomain }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
+
+/**
  * Delete a post
  * @param req
  * @param res
@@ -72,7 +86,6 @@ export function deletePost(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-
     post.remove(() => {
       res.status(200).end();
     });

@@ -8,6 +8,9 @@ router.route('/posts').get(PostController.getPosts);
 // Get one post by cuid
 router.route('/posts/:cuid').get(PostController.getPost);
 
+// Get one post by org and custom domain
+router.route('/posts/:org/:customDomain').get(PostController.getPostbyOrgDom);
+
 // Add a new Post
 router.route('/posts').post(PostController.addPost);
 

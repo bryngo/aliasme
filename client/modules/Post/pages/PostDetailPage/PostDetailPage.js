@@ -16,12 +16,12 @@ import { getPost } from '../../PostReducer';
 export function PostDetailPage(props) {
   return (
     <div>
-      <Helmet title={props.post.title} />
-      <div className={`${styles['single-post']} ${styles['post-detail']}`}>
-        <h3 className={styles['post-title']}>{props.post.title}</h3>
-        <p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>
-        <p className={styles['post-desc']}>{props.post.content}</p>
-      </div>
+      <Helmet title={props.post.org} />
+      <p className={styles['post-desc']}>Organization: {props.post.org}</p>
+      <p className={styles['post-desc']}>Redirect Domain: {props.post.redirectDomain}</p>
+      <p className={styles['post-desc']}>Custom Domain: {props.post.customDomain}</p>
+      <p className={styles['post-desc']}>Custom URL: {props.post.customURL}</p>
+      <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
     </div>
   );
 }
@@ -35,17 +35,22 @@ PostDetailPage.need = [params => {
 function mapStateToProps(state, props) {
   return {
     post: getPost(state, props.params.cuid),
+    paramCuid: props.params.cuid,
   };
 }
 
+// these are parameters passed to this component
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    org: PropTypes.string.isRequired,
+    redirectDomain: PropTypes.string.isRequired,
+    customDomain: PropTypes.string.isRequired,
+    customURL: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
+  paramCuid: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

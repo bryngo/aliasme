@@ -47,6 +47,12 @@ export function fetchPost(cuid) {
   };
 }
 
+export function fetchPostbyOrgDom(org, customDomain) {
+  return (dispatch) => {
+    return callApi(`posts/${org}/${customDomain}`).then(res => dispatch(addPost(res.post)));
+  };
+}
+
 export function deletePost(cuid) {
   return {
     type: DELETE_POST,

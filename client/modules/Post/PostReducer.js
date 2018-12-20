@@ -33,5 +33,8 @@ export const getPosts = state => state.posts.data;
 // Get post by cuid
 export const getPost = (state, cuid) => state.posts.data.filter(post => post.cuid === cuid)[0];
 
+// get post by org and custom domain
+export const getPostbyOrgDom = (state, org, customDomain) => state.posts.data.filter(post => post.org === org, post => post.customDomain === customDomain)[0];
+
 // Export Reducer
 export default PostReducer;

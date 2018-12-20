@@ -6,8 +6,8 @@ import { connectDB, dropDB } from '../../util/test-helpers';
 
 // Initial posts added into test db
 const posts = [
-  new Post({ org: 'DCSC', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' }),
-  new Post({ org: 'BCNC', redirectDomain: 'https://www.yangvincent.com/', customDomain: 'vincent', customURL: 'http://localhost:8000/DCSC/vincent', cuid: 'cikqgkv4q01ck7453ualdn3hf' }),
+  new Post({ org: 'DCSC', slug: 'dcsc', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' }),
+  new Post({ org: 'BCNC', slug: 'bcnc', redirectDomain: 'https://www.yangvincent.com/', customDomain: 'vincent', customURL: 'http://localhost:8000/DCSC/vincent', cuid: 'cikqgkv4q01ck7453ualdn3hf' }),
 ];
 
 test.before('connect to mockgoose', async () => {
@@ -30,19 +30,19 @@ test.serial('Should correctly give number of Posts', async t => {
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
-  // TODO:FIX THIS TEST
-  t.deepEqual(posts.length, /* res.body.posts.length*/ 2);
+  t.deepEqual(posts.length, res.body.posts.length);
 });
 
 test.serial('Should send correct data when queried against a cuid', async t => {
   t.plan(2);
 
-  const post = new Post({ org: 'DCSC', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' });
+  const post = new Post({ org: 'DCSC', slug: 'dcsc', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' });
   post.save();
 
   const res = await request(app)
     .get('/api/posts/cikqgkv4q01ck7453ualdn3hd')
     .set('Accept', 'application/json');
+
 
   t.is(res.status, 200);
   t.is(res.body.post.org, post.org);
@@ -51,9 +51,11 @@ test.serial('Should send correct data when queried against a cuid', async t => {
 test.serial('Should correctly add a post', async t => {
   t.plan(2);
 
+  const post = new Post({ org: 'DCSC', slug: 'dcsc', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' });
+  post.save();
+
   const res = await request(app)
-    .post('/api/posts')
-    .send({ org: 'DCSC', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' })
+    .get('/api/posts/cikqgkv4q01ck7453ualdn3hd')
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
@@ -65,7 +67,7 @@ test.serial('Should correctly add a post', async t => {
 test.serial('Should correctly delete a post', async t => {
   t.plan(2);
 
-  const post = new Post({ org: 'DCSC', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' });
+  const post = new Post({ org: 'DCSC', slug: 'dcsc', redirectDomain: 'https://bryngo.me/', customDomain: 'bryan', customURL: 'http://localhost:8000/DCSC/bryan', cuid: 'cikqgkv4q01ck7453ualdn3hd' });
   post.save();
 
   const res = await request(app)

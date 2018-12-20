@@ -35,6 +35,7 @@ export function addPost(req, res) {
   newPost.redirectDomain = sanitizeHtml(newPost.redirectDomain);
   newPost.customDomain = sanitizeHtml(newPost.customDomain);
   newPost.customURL = sanitizeHtml(newPost.customURL);
+
   newPost.slug = slug(newPost.org.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
   newPost.save((err, saved) => {

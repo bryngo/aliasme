@@ -27,6 +27,7 @@ export class PostCreateWidget extends Component {
           <input placeholder={this.props.intl.messages.org} className={styles['form-field']} ref="org" />
           <input placeholder={this.props.intl.messages.redirectDomain} className={styles['form-field']} ref="redirectDomain" />
           <input placeholder={this.props.intl.messages.customDomain} className={styles['form-field']} ref="customDomain" />
+          <p>Above examples would result in the URL localhost:8000/DCSC/bryan that redirects to https://bryngo.me/</p>
           <a className={styles['post-submit-button']} href="#" onClick={this.addPost}><FormattedMessage id="submit" /></a>
         </div>
       </div>
